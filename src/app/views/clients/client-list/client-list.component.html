@@ -1,0 +1,70 @@
+<c-card>
+    <c-card-header>
+        <c-container>
+            <h4>Pesquisa de Clientes</h4>
+    </c-container>
+    </c-card-header>
+    <c-card-body>
+      <form cForm cRow [formGroup]="form">
+        <!-- Coluna do Input -->
+        <c-col xs="12" sm="8" md="9" class="mb-2 mb-sm-0">
+          <input 
+            #searchText
+            cFormControl 
+            class="m-1" 
+            id="partner" 
+            placeholder="Nome do cliente" 
+            type="text" 
+            (keydown.enter)="search(searchText.value)" 
+            formControlName="search" 
+          />
+        </c-col>
+      
+        <c-col xs="12" sm="4" md="3" class="d-flex flex-column flex-md-row gap-2">
+          <!-- Botão Pesquisar -->
+          <button
+            class="m-1 d-flex justify-content-center align-items-center gap-1 w-100 w-md-auto"
+            cButton
+            type="button"
+            (click)="search(searchText.value)"
+          >
+            <i class="cil-search"></i>
+            Pesquisar
+          </button>
+      
+          <!-- Botão Novo -->
+          <button
+            class="m-1 d-flex justify-content-center align-items-center gap-1 w-100 w-md-auto"
+            cButton
+            color="success"
+            type="button"
+            (click)="new()"
+          >
+            <i class="cil-plus"></i>
+            Novo
+          </button>
+        </c-col>
+      </form>
+          <hr>
+           @if(isLoading){
+            <c-spinner variant="grow"  size="sm"/> Carregando
+           } 
+           @else{
+            @if(dataTable.length > 0 ){
+              <app-generic-table
+              [columns]="columns"
+              [data]="dataTable"
+              [totalRecords]="totalRecords"
+              [rowsPerPage]="pageSize"
+              (pageChange)="onPageChanged($event)"
+              [buttons]="buttons"
+              (buttonClick)="handleButtonClick($event)"
+            ></app-generic-table>
+            }
+            @else {
+              <c-alert color="light">Você não possui nenhum cliente cadastrado!</c-alert>
+            }
+           }
+        
+    </c-card-body>
+  </c-card>

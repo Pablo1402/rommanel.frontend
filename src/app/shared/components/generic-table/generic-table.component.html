@@ -1,0 +1,61 @@
+<!-- table.component.html -->
+<table [striped]="true" [responsive]="true" cTable>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns">{{ column.label }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+
+      <td *ngFor="let column of columns" >
+        @if(column.isEditable){
+          @if(column.isNumber){
+            <div class="d-flex justify-content-end w-100">
+              <input 
+              currencyMask [options]="{prefix:'', thousands:'.', decimal:','}"
+              type="text"
+               class="form-control form-control-sm"
+              [(ngModel)]="row[column.key]"
+              (ngModelChange)="onInputChange(row, column.key)" />
+            </div>
+          }
+          @else{
+            <div class="d-flex justify-content-end w-100">
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="row[column.key]"
+              (ngModelChange)="onInputChange(row, column.key)" />
+            </div>
+          }
+          
+        }@else if(column.label === "#"){
+        <c-avatar shape="rounded-1" [size]="'md'" [src]="row[column.key]" textColor="primary" alt="User avatar" />
+        }@else if(column.textCenter){
+        <div class="text-center">
+          {{row[column.key]}} 
+        </div>
+        }@else{
+        <div >
+          {{row[column.key]}} 
+        </div>
+
+        }
+      </td>
+      <td *ngIf="buttons?.length">
+        <div class="button-group d-flex justify-content-end gap-2 pr-3">
+          <button *ngFor="let button of buttons"
+            class="btn btn-sm d-flex justify-content-center align-items-center gap-1" [ngClass]="button.class"
+            (click)="onButtonClick(button.action, row)">
+            @if(button.icon){
+            <i [ngClass]="button.icon"></i>
+
+            }
+            {{ button.label }}
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-generic-pagination [totalItems]="totalRecords" [itemsPerPage]="rowsPerPage" [currentPage]="currentPage"
+  (pageChange)="onPageChange($event)"></app-generic-pagination>

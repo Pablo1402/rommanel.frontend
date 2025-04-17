@@ -1,0 +1,18 @@
+.custom-widget {
+  min-height: 150px; // Define uma altura mínima para o card
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  span {
+    font-size: 2.5rem; // Valor principal maior
+    font-weight: bold;
+  }
+
+  h5 {
+    font-size: 1.2rem; // Ajusta o tamanho do título
+    margin-top: 0.5rem;
+  }
+}
+

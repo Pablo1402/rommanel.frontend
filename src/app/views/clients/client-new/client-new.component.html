@@ -1,0 +1,69 @@
+<c-card>
+    <c-card-header>
+        <c-container>
+            <h4>Novo Cliente</h4>
+        </c-container>
+    </c-card-header>
+    <c-card-body>
+        <form [formGroup]="clientForm" autocomplete="off" cForm cRow>
+            <c-col class="mb-4" xs="12">
+                <label cLabel for="clientName">Nome</label>
+                <input cFormControl formControlName="name" autocomplete="off" id="clientName" placeholder="Nome"
+                    type="text" />
+            </c-col>
+            <c-col class="mb-4" xs="12">
+                <label cLabel for="clientEmail">Email</label>
+                <input cFormControl formControlName="email" id="clientEmail" placeholder="Email" type="mail" />
+            </c-col>
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="clientPhone">Telefone</label>
+                <input cFormControl formControlName="phone" id="clientPhone" placeholder="Telefone" type="text" />
+            </c-col>
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="bitrhDate">Data Nascimento</label>
+                <input cFormControl formControlName="bitrhDate" id="bitrhDate" type="date" />
+            </c-col>
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="type">Tipo de Pessoa</label>
+                <select formControlName="type" placeholder="Selecione" cSelect>
+                    <option value=1>Fisica</option>
+                    <option value=2>Juridica</option>
+                </select>
+            </c-col>
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="clientPhone">Documento</label>
+                <input cFormControl formControlName="document" id="clientDocument" placeholder="Documento" type="text" />
+            </c-col>
+           
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="stateRegistration">Incrição Estadual</label>
+                <input cFormControl formControlName="stateRegistration" id="stateRegistration"
+                    placeholder="Inscricao Estadual" type="text" />
+            </c-col>
+
+            <c-col class="mb-4" xs="6">
+                <label cLabel for="stateRegistration">&nbsp;</label>
+                <c-form-check class="mb-3">
+                    <input cFormCheckInput formControlName="freeStateRegistration" id="freeStateRegistration" type="checkbox">
+                    <label cFormCheckLabel for="freeStateRegistration">Isento de incrição Estadual</label>
+                </c-form-check>
+            </c-col>
+
+
+            <hr class="mt-4 mb-4">
+            <c-col xs="12" xs="12" class="d-flex flex-column flex-sm-row-reverse gap-2">
+                <button class="m-1 d-flex justify-content-center align-items-center gap-1 w-sm-100 w-auto" cButton
+                    color="info" type="button" (click)="save()" [disabled]="clientForm.pristine || clientForm.invalid">
+                    <i class="cil-save" size="xl"></i>
+                    Salvar
+                </button>
+                <button class="m-1 d-flex justify-content-center align-items-center gap-1 w-sm-100 w-auto" cButton
+                    color="light" type="button" (click)="cancel()">
+                    <i class="cil-arrow-circle-left"></i>
+                    Cancelar
+                </button>
+
+            </c-col>
+        </form>
+    </c-card-body>
+</c-card>
