@@ -1,0 +1,42 @@
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" cForm cRow>
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="zipCode">CEP</label>
+    <input cFormControl formControlName="zipCode" id="zipCode" placeholder="CEP" type="text" />
+  </c-col>
+
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="street">Rua</label>
+    <input cFormControl formControlName="street" id="street" placeholder="Rua" type="text" />
+  </c-col>
+
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="number">Número</label>
+    <input cFormControl formControlName="number" id="number" placeholder="Número" type="text" />
+  </c-col>
+
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="neighborhood">Bairro</label>
+    <input cFormControl formControlName="neighborhood" id="neighborhood" placeholder="Bairro" type="text" />
+  </c-col>
+
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="city">Cidade</label>
+    <input cFormControl formControlName="city" id="city" placeholder="Cidade" type="text" />
+  </c-col>
+
+  <c-col class="mb-3" xs="12" sm="12">
+    <label cLabel for="state">Estado</label>
+    <input cFormControl formControlName="state" id="state" placeholder="Estado" type="text" />
+  </c-col>
+
+  <c-col xs="12" class="d-flex justify-content-end gap-2">
+    <button cButton color="secondary" type="button" (click)="onCancel()">
+      <i class="cil-x"></i>
+      Cancelar
+    </button>
+    <button cButton color="primary" type="submit" [disabled]="addressForm.invalid">
+      <i class="cil-save"></i>
+      {{ isEditing ? 'Atualizar' : 'Salvar' }}
+    </button>
+  </c-col>
+</form> 

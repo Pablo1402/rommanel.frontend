@@ -33,7 +33,7 @@ export class ClientNewComponent {
       bitrhDate: ['', Validators.required],
       type: ['', Validators.required],
       stateRegistration: [''],
-      freeStateRegistration: ['', Validators.required],
+      freeStateRegistration: [false],
 
     });
   }
@@ -55,6 +55,7 @@ export class ClientNewComponent {
       var data = {
         ...formData,
         bitrhDate: new Date(formData.bitrhDate).toISOString(),
+        freeStateRegistration: formData.freeStateRegistration??false,
         type: Number(formData.type)
       };
       return data;

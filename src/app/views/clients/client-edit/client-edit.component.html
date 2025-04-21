@@ -53,6 +53,30 @@
 
 
             <hr class="mt-4 mb-4">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>Endereços do Cliente</h3>
+                <button
+                  class="d-flex justify-content-center align-items-center gap-1"
+                  cButton
+                  color="success"
+                  type="button"
+                  (click)="openAddressModal()"
+                >
+                  <i class="cil-plus"></i>
+                  Novo
+                </button>
+              </div>
+
+            @if(cliente && cliente.addresses && cliente.addresses.length > 0) {
+                <app-address-list 
+                    [addresses]="cliente.addresses"
+                    (edit)="openAddressModal($event)"
+                    (delete)="deleteAddessEvent($event)"
+                ></app-address-list>
+            }
+
+            <hr class="mt-4 mb-4">
             <c-col xs="12" xs="12" class="d-flex flex-column flex-sm-row-reverse gap-2">
                 <button class="m-1 d-flex justify-content-center align-items-center gap-1 w-sm-100 w-auto" cButton
                     color="info" type="button" (click)="save()" [disabled]="clientForm.pristine || clientForm.invalid">
@@ -61,7 +85,8 @@
                 </button>
 
                 <button class="m-1 d-flex justify-content-center align-items-center gap-1 w-sm-100 w-auto"
-                    [cModalToggle]="staticBackdropModal.id" cButton color="danger" type="button">
+                    [cModalToggle]="staticBackdropModal.id" cButton color="danger" type="button"
+                    [disabled]="!habilitaexclusao">
                     <i class="cil-trash"></i>
                     Excluir
                 </button>
@@ -74,8 +99,28 @@
 
             </c-col>
         </form>
+      
     </c-card-body>
 </c-card>
+
+<!-- Modal de Endereço -->
+<c-modal #addressModal backdrop="static" id="addressModal" [visible]="visibleAddressFrom" >
+    <c-modal-header>
+        <h5 cModalTitle>{{ editingAddress ? 'Editar' : 'Novo' }} Endereço</h5>
+    </c-modal-header>
+    <c-modal-body>
+        @if(habilitaModalendereco){
+            <app-address-form
+            [address]="editingAddress"
+            [clientId]="cliente?.id || ''"
+            (save)="onAddressSave($event)"
+            (cancel)="onAddressCancel()"
+        ></app-address-form>
+        }
+        
+    </c-modal-body>
+    
+</c-modal>
 
 <c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal">
     <c-modal-header>

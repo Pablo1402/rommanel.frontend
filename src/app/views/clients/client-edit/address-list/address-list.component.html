@@ -1,0 +1,14 @@
+<div class="address-list">
+ 
+
+  @if(addresses.length > 0){
+    <app-generic-table
+      [columns]="columns"
+      [data]="addresses"
+      [buttons]="buttons"
+      (buttonClick)="onButtonClick($event)"
+    ></app-generic-table>
+  } @else {
+    <p>Nenhum endereço encontrado</p>
+  }
+</div> 
